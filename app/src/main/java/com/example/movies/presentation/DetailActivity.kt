@@ -38,7 +38,6 @@ class DetailActivity : AppCompatActivity() {
 
         val movieId = intent?.getIntExtra(EXTRA_MOVIE_ID, 0) ?: return
         viewModel.getMovieInfo(movieId).observe(this) {
-            Log.d("TEST", it.toString())
             with(binding) {
                 Picasso.get().load(it.posterPath).into(imageViewBigPoster)
                 textViewTitle.text = it.title

@@ -72,9 +72,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
         return result
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("TEST", "onCleared")
-    }
 }

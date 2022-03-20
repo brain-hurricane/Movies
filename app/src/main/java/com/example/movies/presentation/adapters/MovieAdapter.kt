@@ -31,7 +31,6 @@ class MovieAdapter: ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffUt
         if (position > itemCount - 4) {
             onReachEndListener?.invoke()
         }
-        //Log.d("TEST", position.toString())
     }
 
     class MovieViewHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root)
