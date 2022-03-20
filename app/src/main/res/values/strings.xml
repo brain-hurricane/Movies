@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="most_popular">Самые популярные</string>
+    <string name="high_rating">С высоким рейтингом</string>
+    <string name="favourite">Избранное</string>
+    <string name="main_page">Главная</string>
+</resources>
