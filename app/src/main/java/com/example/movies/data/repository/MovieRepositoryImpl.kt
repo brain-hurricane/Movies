@@ -1,6 +1,7 @@
 package com.example.movies.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.movies.data.database.AppDatabase
@@ -21,6 +22,7 @@ class MovieRepositoryImpl(private val application: Application) : MovieRepositor
     private val apiService = ApiFactory.apiService
 
     override fun getMovies(sortBy: Int): LiveData<List<Movie>> {
+        //Log.d("TEST", "getMovies")
         val listMoviesDbModel = if (sortBy == SORT_BY_POPULARITY) {
             dao.getMoviesListSortPopularity()
         } else if (sortBy == SORT_BY_AVERAGE_VOTE) {
@@ -51,6 +53,7 @@ class MovieRepositoryImpl(private val application: Application) : MovieRepositor
     }
 
     override suspend fun loadData(page: Int) {
+        //Log.d("TEST", "loadData")
         try {
             val moviesDto = apiService.getMovies(page = page.toString())
             val moviesDbModel = moviesDto.results?.map {

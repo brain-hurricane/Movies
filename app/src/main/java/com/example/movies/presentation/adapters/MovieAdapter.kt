@@ -1,7 +1,9 @@
 package com.example.movies.presentation.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.databinding.MovieItemBinding
@@ -28,9 +30,7 @@ class MovieAdapter: ListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffUt
         holder.binding.root.setOnClickListener {
             onPosterClickListener?.invoke(movie)
         }
-        if (position > itemCount - 4) {
-            onReachEndListener?.invoke()
-        }
+        //Log.d("TEST", "count $itemCount position $position")
     }
 
     class MovieViewHolder(val binding: MovieItemBinding): RecyclerView.ViewHolder(binding.root)

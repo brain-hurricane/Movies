@@ -31,10 +31,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setupRecyclerView()
         setupListeners()
         setTextColors(false)
         viewModel.loadData()
+        setupRecyclerView()
+
     }
 
     private fun updateMoviesList() {

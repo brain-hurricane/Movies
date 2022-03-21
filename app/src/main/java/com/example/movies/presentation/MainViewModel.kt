@@ -22,9 +22,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val getMoviesUseCase = GetMoviesUseCase(repository)
     private val getMovieInfoUseCase = GetMovieInfoUseCase(repository)
-    private val loadDataUseCase = LoadDataUseCase(repository)
 
+    private val loadDataUseCase = LoadDataUseCase(repository)
     var moviesList = getMoviesUseCase(MovieRepositoryImpl.SORT_BY_POPULARITY)
+
     private val _videos = MutableLiveData<List<Videos>>()
     val videos: LiveData<List<Videos>>
         get() = _videos
@@ -38,38 +39,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadData() {
-        if (isInternetAvailable(getApplication())) {
-            viewModelScope.launch {
-                loadDataUseCase(currentPage++)
+        viewModelScope.launch {
+            for (page in 1..25) {
+                loadDataUseCase(page)
             }
         }
     }
 
     fun getVideos(id: Int) {
-        if (isInternetAvailable(getApplication())) {
-            viewModelScope.launch {
-                _videos.postValue(repository.getVideos(id))
-            }
+        viewModelScope.launch {
+            _videos.postValue(repository.getVideos(id))
         }
     }
 
     fun getFavouritesMovies(): LiveData<List<Movie>> {
         return repository.getFavouriteMovies()
-    }
-
-    private fun isInternetAvailable(context: Context): Boolean {
-        val result: Boolean
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkCapabilities = connectivityManager.activeNetwork ?: return false
-        val actNw =
-            connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
-        result = when {
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-            else -> false
-        }
-        return result
     }
 }
