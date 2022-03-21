@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         setTextColors(false)
         viewModel.loadData()
         setupRecyclerView()
-
     }
 
     private fun updateMoviesList() {
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         updateMoviesList()
         val layoutManager = binding.rvPosters.layoutManager
         scope.launch {
-            delay(300)
+            delay(400)
             layoutManager?.scrollToPosition(0)
         }
         setTextColors(isChecked)

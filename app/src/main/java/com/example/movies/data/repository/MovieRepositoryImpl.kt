@@ -10,6 +10,7 @@ import com.example.movies.data.mappers.VideosMapper
 import com.example.movies.data.network.ApiFactory
 import com.example.movies.data.network.ApiService
 import com.example.movies.data.network.URL_GET_VIDEOS
+import com.example.movies.data.network.model.MovieDto
 import com.example.movies.data.preferences.AppSettings
 import com.example.movies.domain.Movie
 import com.example.movies.domain.MovieRepository
@@ -52,16 +53,19 @@ class MovieRepositoryImpl(private val application: Application) : MovieRepositor
         }
     }
 
-    override suspend fun loadData(page: Int) {
-        //Log.d("TEST", "loadData")
-        try {
-            val moviesDto = apiService.getMovies(page = page.toString())
-            val moviesDbModel = moviesDto.results?.map {
-                MovieMapper.mapDtoToDbModel(it)
-            } ?: throw RuntimeException("Error in loadData(), moviesDbModel == null, line 30 MovieRepositoryImpl")
-            dao.insertMoviesList(moviesDbModel)
-        } catch (e: Exception) {
+    override suspend fun loadData() {
+        val listDto = mutableListOf<MovieDto>()
+        for (page in 1..25) {
+            try {
+                val moviesDto = apiService.getMovies(page = page.toString())
+                listDto.addAll(moviesDto.results!!)
+            } catch (e: Exception) {
+            }
         }
+        val moviesDbModel = listDto.map {
+            MovieMapper.mapDtoToDbModel(it)
+        }
+        dao.insertMoviesList(moviesDbModel)
     }
 
     override suspend fun getVideos(id: Int): List<Videos>? {

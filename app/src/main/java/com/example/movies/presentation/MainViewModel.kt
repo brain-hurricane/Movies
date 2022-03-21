@@ -40,9 +40,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun loadData() {
         viewModelScope.launch {
-            for (page in 1..25) {
-                loadDataUseCase(page)
-            }
+            loadDataUseCase()
         }
     }
 

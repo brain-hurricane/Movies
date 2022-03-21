@@ -10,7 +10,7 @@ interface MovieRepository {
 
     fun getFavouriteMovies(): LiveData<List<Movie>>
 
-    suspend fun loadData(page: Int)
+    suspend fun loadData()
 
     suspend fun getVideos(id: Int): List<Videos>?
 }
