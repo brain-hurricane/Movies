@@ -1,14 +1,12 @@
 package com.example.movies.data.repository
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.movies.data.database.AppDatabase
 import com.example.movies.data.mappers.MovieMapper
 import com.example.movies.data.mappers.VideosMapper
 import com.example.movies.data.network.ApiFactory
-import com.example.movies.data.network.ApiService
 import com.example.movies.data.network.URL_GET_VIDEOS
 import com.example.movies.data.network.model.MovieDto
 import com.example.movies.data.preferences.AppSettings
@@ -16,14 +14,12 @@ import com.example.movies.domain.Movie
 import com.example.movies.domain.MovieRepository
 import com.example.movies.domain.Videos
 
-
 class MovieRepositoryImpl(private val application: Application) : MovieRepository {
 
     private val dao = AppDatabase.getInstance(application).coinPriceInfoDao()
     private val apiService = ApiFactory.apiService
 
     override fun getMovies(sortBy: Int): LiveData<List<Movie>> {
-        //Log.d("TEST", "getMovies")
         val listMoviesDbModel = if (sortBy == SORT_BY_POPULARITY) {
             dao.getMoviesListSortPopularity()
         } else if (sortBy == SORT_BY_AVERAGE_VOTE) {
