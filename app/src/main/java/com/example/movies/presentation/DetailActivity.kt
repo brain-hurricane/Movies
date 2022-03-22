@@ -3,17 +3,14 @@ package com.example.movies.presentation
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.movies.R
 import com.example.movies.data.network.BASE_YOUTUBE_URL
 import com.example.movies.data.preferences.AppSettings
 import com.example.movies.databinding.ActivityDetailBinding
-import com.example.movies.databinding.ActivityMainBinding
 import com.example.movies.domain.Movie
-import com.example.movies.domain.Videos
 import com.example.movies.presentation.adapters.VideosAdapter
 import com.squareup.picasso.Picasso
 

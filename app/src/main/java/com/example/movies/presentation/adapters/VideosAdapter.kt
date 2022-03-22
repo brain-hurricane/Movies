@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.movies.databinding.MovieItemBinding
 import com.example.movies.databinding.TrailerItemBinding
-import com.example.movies.domain.Movie
 import com.example.movies.domain.Videos
-import com.squareup.picasso.Picasso
 
 class VideosAdapter: ListAdapter<Videos, VideosAdapter.VideosViewHolder>(VideosDiffUtilCallback()) {
 

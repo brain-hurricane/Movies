@@ -2,7 +2,6 @@ package com.example.movies.data.network
 
 import com.example.movies.data.network.model.MoviesContainerDto
 import com.example.movies.data.network.model.VideosContainerDto
-import com.example.movies.data.network.model.VideosDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
