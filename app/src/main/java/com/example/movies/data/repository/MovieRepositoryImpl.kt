@@ -61,7 +61,14 @@ class MovieRepositoryImpl(private val application: Application) : MovieRepositor
                 listDto.addAll(moviesDto.results!!)
             } catch (e: Exception) {
             }
+            if (page == 5) {
+                insertMoviesInDb(listDto)
+            }
         }
+        insertMoviesInDb(listDto)
+    }
+
+    private suspend fun insertMoviesInDb(listDto: List<MovieDto>) {
         val moviesDbModel = listDto.map {
             MovieMapper.mapDtoToDbModel(it)
         }

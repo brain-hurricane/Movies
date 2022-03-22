@@ -16,8 +16,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    var currentPage = 1
-
     private val repository = MovieRepositoryImpl(application)
 
     private val getMoviesUseCase = GetMoviesUseCase(repository)

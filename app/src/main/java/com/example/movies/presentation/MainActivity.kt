@@ -1,12 +1,15 @@
 package com.example.movies.presentation
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.data.repository.MovieRepositoryImpl
 import com.example.movies.databinding.ActivityMainBinding
@@ -35,6 +38,14 @@ class MainActivity : AppCompatActivity() {
         setTextColors(false)
         viewModel.loadData()
         setupRecyclerView()
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.rvPosters.layoutManager = GridLayoutManager(this, 4)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateMoviesList()
     }
 
     private fun updateMoviesList() {
